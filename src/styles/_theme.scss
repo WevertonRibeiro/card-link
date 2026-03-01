@@ -1,6 +1,7 @@
 :root {
   --color-background: var(--white);
   --color-surface: var(--white);
+  --color-surface-secundary: var(--gray-light);
   --color-text: var(--black);
   --color-border: var(--gray);
 }
@@ -8,6 +9,7 @@
 :root[data-theme="dark"] {
   --color-background: var(--black);
   --color-surface: var(--black-light);
+  --color-surface-secundary: var(--black-middle);
   --color-text: var(--white);
   --color-border: var(--gray-black);
 }
