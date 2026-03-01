@@ -1,0 +1,13 @@
+:root {
+  --color-background: var(--white);
+  --color-surface: var(--white);
+  --color-text: var(--black);
+  --color-border: var(--gray);
+}
+
+:root[data-theme="dark"] {
+  --color-background: var(--black);
+  --color-surface: var(--black-light);
+  --color-text: var(--white);
+  --color-border: var(--gray-black);
+}

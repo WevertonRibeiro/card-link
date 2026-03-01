@@ -4,13 +4,13 @@ import Header from "./Header.vue";
 
 <template>
   <div class="default-layout-wrapper">
-    <header class="header">
+    <header>
       <Header />
     </header>
     <main class="content">
       <router-view />
     </main>
-    <footer class="footer"><h1>footer</h1></footer>
+    <footer><h1>footer</h1></footer>
   </div>
 </template>
 
