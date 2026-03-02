@@ -96,17 +96,8 @@ const handleLogout = () => {
   }
 
   @media (max-width: 900px) {
-    height: unset;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding-block: 16px;
     .logo {
       height: 25px;
-    }
-    .search {
-      grid-column: 1 /3;
-      grid-row: 2;
     }
     .profile-wrapper {
       justify-self: end;
@@ -115,6 +106,19 @@ const handleLogout = () => {
       :deep(.name-wrapper) {
         display: none;
       }
+    }
+  }
+
+  @media (max-width: 700px) {
+    height: unset;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding-block: 16px;
+
+    .search {
+      grid-column: 1 /3;
+      grid-row: 2;
     }
   }
 }
