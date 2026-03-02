@@ -3,7 +3,11 @@
   --color-surface: var(--white);
   --color-surface-secundary: var(--gray-light);
   --color-text: var(--black);
+  --color-text-secundary: var(--gray-middle);
   --color-border: var(--gray);
+
+  --color-offer: var(--red);
+  --color-receive: var(--green);
 }
 
 :root[data-theme="dark"] {
@@ -11,5 +15,6 @@
   --color-surface: var(--black-light);
   --color-surface-secundary: var(--black-middle);
   --color-text: var(--white);
+  --color-text-secundary: var(--gray-middle);
   --color-border: var(--gray-black);
 }
