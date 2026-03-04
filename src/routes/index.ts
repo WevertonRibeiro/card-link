@@ -5,7 +5,10 @@ import DefaultLayout from "@/layouts/DefaultLayout/DefaultLayout.vue";
 import NotFound from "@/pages/public/NotFound.vue";
 
 import Login from "@/pages/public/Login.vue";
-import Home from "@/pages/protected/Home.vue";
+import Register from "@/pages/public/Register.vue";
+import Home from "@/pages/public/Home.vue";
+
+import MyAccount from "@/pages/protected/MyAccount.vue";
 
 const routes = [
   {
@@ -18,13 +21,17 @@ const routes = [
         name: "Login",
         component: Login,
       },
+      {
+        path: "register",
+        name: "Register",
+        component: Register,
+      },
     ],
   },
   {
     path: "/",
-    name: "homepage",
+    name: "Homepage",
     component: DefaultLayout,
-    meta: { requiresAuth: true },
     children: [
       {
         path: "",
@@ -33,6 +40,20 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/",
+    name: "Account",
+    component: DefaultLayout,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: "/my-account",
+        name: "MyAccount",
+        component: MyAccount,
+      },
+    ],
+  },
+
   {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
