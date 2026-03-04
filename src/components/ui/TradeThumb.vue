@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import { TransferData, ArrowLeft, ArrowRight } from "@icon-park/vue-next";
+import { computed } from "vue";
+
+import { ArrowLeft, ArrowRight } from "@icon-park/vue-next";
 
 type TradeThumbProps = {
   offering: string[];
@@ -7,18 +9,26 @@ type TradeThumbProps = {
 };
 
 const props = defineProps<TradeThumbProps>();
+
+const offeringImages = computed(() => {
+  return props.offering.slice(0, 3);
+});
+
+const receivingImages = computed(() => {
+  return props.receiving.slice(0, 3);
+});
 </script>
 <template>
   <div class="trade-thumb">
-    <div class="left" :class="{ 'more-one': offering.length > 1 }">
-      <img v-for="(card, index) in offering" :key="index" :src="card" />
+    <div class="left" :class="{ 'more-one': offeringImages.length > 1 }">
+      <img v-for="(card, index) in offeringImages" :key="index" :src="card" />
     </div>
     <div class="middle">
       <ArrowLeft class="receive-icon" />
       <ArrowRight class="offer-icon" />
     </div>
-    <div class="right" :class="{ 'more-one': receiving.length > 1 }">
-      <img v-for="(card, index) in receiving" :key="index" :src="card" />
+    <div class="right" :class="{ 'more-one': receivingImages.length > 1 }">
+      <img v-for="(card, index) in receivingImages" :key="index" :src="card" />
     </div>
   </div>
 </template>
@@ -52,8 +62,6 @@ const props = defineProps<TradeThumbProps>();
   position: relative;
   img {
     position: relative;
-    border: solid 2px var(--color-surface);
-    border-radius: 10px;
   }
   &.more-one {
     img {
