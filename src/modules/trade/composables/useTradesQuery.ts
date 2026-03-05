@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/vue-query";
-import { getTrades } from "../services/tradeService";
+import { getTrades } from "../services/trade.service";
 
 export function useTradesQuery() {
   return useQuery({

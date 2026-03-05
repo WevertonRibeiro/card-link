@@ -78,6 +78,7 @@ const initials = computed(() => {
     color: var(--color-text);
     .action {
       cursor: pointer;
+      font-size: 0.9rem;
     }
   }
 }

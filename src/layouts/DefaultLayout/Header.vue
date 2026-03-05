@@ -1,6 +1,11 @@
 ﻿<script lang="ts" setup>
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
 import { useTheme } from "@/composables/useTheme";
+import { useAuthStore } from "@/modules/auth/stores/auth.store";
+import { useMeQuery } from "@/modules/auth/composables/useAuthQuery";
+
 import Container from "@/components/layout/Container.vue";
 import SearchInput from "@/components/ui/SearchInput.vue";
 import Profile from "@/components/ui/Profile.vue";
@@ -15,7 +20,12 @@ import {
 } from "@icon-park/vue-next";
 
 const searchValue = ref("");
+
+const router = useRouter();
 const { theme, toggleTheme } = useTheme();
+const { data: user } = useMeQuery();
+const authStore = useAuthStore();
+const { isAuthenticated } = storeToRefs(authStore);
 
 const items = computed(() => {
   return [
@@ -32,12 +42,12 @@ const items = computed(() => {
     {
       icon: theme.value === "light" ? Moon : Sun,
       label: theme.value === "light" ? "Tema escuro" : "Tema claro",
-      action: () => toggleTheme(),
+      action: toggleTheme,
     },
     {
       icon: Logout,
       label: "Sair",
-      action: () => console.log("Logout"),
+      action: handleLogout,
     },
   ];
 });
@@ -47,7 +57,7 @@ const onSearch = (value: string) => {
 };
 
 const handleLogout = () => {
-  console.log("Logout");
+  authStore.clearSession();
 };
 </script>
 <template>
@@ -63,19 +73,28 @@ const handleLogout = () => {
         class="search"
       />
 
-      <Menu :items="items" class="profile-wrapper">
+      <Menu :items="items" class="profile-wrapper" :disabled="!isAuthenticated">
         <template #trigger>
+          {{ isAuthenticated }}
           <Profile
-            name="Weverton Ribeiro"
+            v-if="isAuthenticated"
+            :name="user?.name || ''"
             showFullName
             actionTitle="Sair"
             :action="handleLogout"
             class="profile-header"
           />
+          <Profile
+            v-else
+            name=""
+            actionTitle="Entrar"
+            :action="() => router.push('auth/login')"
+            class="profile-header"
+          />
         </template>
         <template #header>
           <Profile
-            name="Weverton Ribeiro"
+            :name="user?.name || ''"
             showFullName
             actionTitle="emaildoerto@gmail.com"
             reverse

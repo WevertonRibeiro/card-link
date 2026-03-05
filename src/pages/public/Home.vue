@@ -11,9 +11,9 @@ import GameCardSkeleton from "@/components/ui/GameCardSkeleton.vue";
 import { Star, History } from "@icon-park/vue-next";
 
 import { useTradesQuery } from "@/modules/trade/composables/useTradesQuery";
-import { useTradeImages } from "@/modules/trade/composables/useTradeImages";
-
 import { useCardsQuery } from "@/modules/card/composables/useCardsQuery";
+
+import { getTradeCardImages } from "@/modules/trade/utils/tradeImages.utils";
 
 const { data: tradesData, isLoading, isError, error } = useTradesQuery();
 const { data: featuredCardsData, isLoading: isLoadingCards } = useCardsQuery();
@@ -25,8 +25,8 @@ const tradeItems = computed(() =>
     ...trade,
     offeringNames: trade.offeringCards.map((card) => card.name).join(", "),
     receivingNames: trade.receivingCards.map((card) => card.name).join(", "),
-    offeringImages: useTradeImages(trade.offeringCards),
-    receivingImages: useTradeImages(trade.receivingCards),
+    offeringImages: getTradeCardImages(trade.offeringCards),
+    receivingImages: getTradeCardImages(trade.receivingCards),
   })),
 );
 </script>
