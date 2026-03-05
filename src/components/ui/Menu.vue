@@ -10,6 +10,7 @@ interface MenuItem {
 }
 
 const props = defineProps<{
+  disabled?: boolean;
   items: MenuItem[];
 }>();
 
@@ -17,6 +18,7 @@ const isOpen = ref(false);
 const dropdownRef = ref<HTMLElement | null>(null);
 
 const toggle = () => {
+  if (props.disabled) return;
   isOpen.value = !isOpen.value;
 };
 
