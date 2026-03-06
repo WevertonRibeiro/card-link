@@ -15,7 +15,7 @@ import { useFeaturedCardsQuery } from "@/modules/card/composables/useCardsQuery"
 
 import { getTradeCardImages } from "@/modules/trade/utils/tradeImages.utils";
 
-const { data: tradesData, isLoading, isError, error } = useTradesQuery();
+const { data: tradesData, isLoading } = useTradesQuery();
 const { data: featuredCardsData, isLoading: isLoadingCards } =
   useFeaturedCardsQuery();
 
