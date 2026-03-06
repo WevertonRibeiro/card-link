@@ -7,5 +7,6 @@ export function mapCard(card: CardDTO): Card {
     name: card.name,
     description: card.description,
     imageUrl: card.imageUrl,
+    createdAt: new Date(card.createdAt),
   };
 }

@@ -3,12 +3,14 @@
   --color-surface: var(--white);
   --color-surface-secundary: var(--gray-light);
   --color-text: var(--black);
+  --color-text-active: var(--green);
   --color-text-secundary: var(--gray-middle);
   --color-border: var(--gray);
   --color-star: var(--yellow);
 
   --color-offer: var(--red);
   --color-receive: var(--green);
+  --color-danger: var(--red);
 }
 
 :root[data-theme="dark"] {

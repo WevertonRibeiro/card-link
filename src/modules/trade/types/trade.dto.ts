@@ -22,3 +22,12 @@ export interface TradeCardDTO {
   type: TradeCardTypeDTO;
   card: CardDTO;
 }
+
+export interface TradeCardRequestDTO {
+  cardId: string;
+  type: TradeCardTypeDTO;
+}
+
+export interface TradeRequestDTO {
+  cards: TradeCardRequestDTO[];
+}

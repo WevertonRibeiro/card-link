@@ -13,11 +13,15 @@ import type {
   MeResponse,
 } from "../types/auth.model";
 
-import { mapLoginResponse, mapRegisterResponse } from "../mappers/auth.mapper";
+import {
+  mapLoginResponse,
+  mapRegisterResponse,
+  mapMeResponse,
+} from "../mappers/auth.mapper";
 
 export async function getMe(): Promise<MeResponse> {
   const response = await api.get<MeResponseDTO>("/me");
-  return response.data;
+  return mapMeResponse(response.data);
 }
 
 export async function postLogin({

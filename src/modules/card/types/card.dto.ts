@@ -9,3 +9,7 @@ export interface CardDTO {
   imageUrl: string;
   createdAt: string;
 }
+
+export interface PostMeCardRequestDTO {
+  cardIds: string[];
+}
