@@ -115,6 +115,7 @@ const handleLogout = () => {
   align-items: center;
   .logo {
     height: 30px;
+    width: 122px;
   }
 
   @media (max-width: 900px) {
