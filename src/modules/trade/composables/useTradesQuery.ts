@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/vue-query";
-import { getTrades, PostTrade } from "../services/trade.service";
+import { getTrades, postTrade, deleteTrade } from "../services/trade.service";
 import type { TradeRequestDTO } from "../types/trade.dto";
 
 export function useTradesQuery() {
@@ -14,7 +14,18 @@ export function useCreateTradeMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (cards: TradeRequestDTO) => PostTrade(cards),
+    mutationFn: (cards: TradeRequestDTO) => postTrade(cards),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["trades"] });
+    },
+  });
+}
+
+export function useDeleteTradeMutation() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteTrade,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["trades"] });
     },

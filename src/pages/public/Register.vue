@@ -1,73 +1,45 @@
 <script lang="ts" setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 import googleG from "@/assets/images/google-g.png";
-import logo from "@/assets/images/logo-cardlink.svg";
+import Logo from "@/components/ui/Logo.vue";
 
 import TextInput from "@/components/ui/TextInput.vue";
 import Button from "@/components/ui/Button.vue";
 
+import { useForm, useField } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/yup";
+import { registerSchema } from "@/modules/auth/schemas/auth.schema";
+
 import { useRegisterMutation } from "@/modules/auth/composables/useAuthQuery";
 
-const registerMutation = useRegisterMutation();
+const { mutateAsync: registerMutateAsync, isPending: registerPending } =
+  useRegisterMutation();
 
-const name = ref("");
-const email = ref("");
-const password = ref("");
-const confirmPassword = ref("");
+const { handleSubmit, meta } = useForm({
+  validationSchema: toTypedSchema(registerSchema),
+});
 const error = ref("");
 
-const nameError = computed(() => {
-  if (!name.value) return "";
-  if (name.value.length < 2) return "Nome deve ter pelo menos 2 caracteres";
-  return "";
-});
+const { value: name, errorMessage: nameError } = useField<string>("name");
+const { value: email, errorMessage: emailError } = useField<string>("email");
+const { value: password, errorMessage: passwordError } =
+  useField<string>("password");
+const { value: confirmPassword, errorMessage: confirmPasswordError } =
+  useField<string>("confirmPassword");
 
-const emailError = computed(() => {
-  if (!email.value) return "";
-  if (!email.value.includes("@")) return "Email inválido";
-  return "";
-});
-
-const passwordError = computed(() => {
-  if (!password.value) return "";
-  if (password.value.length < 6) return "Mínimo 6 caracteres";
-  return "";
-});
-
-const confirmPasswordError = computed(() => {
-  if (!confirmPassword.value) return "";
-  if (confirmPassword.value !== password.value) return "Senhas não coincidem";
-  return "";
-});
-
-const isFormValid = computed(
-  () =>
-    name.value &&
-    email.value &&
-    password.value &&
-    confirmPassword.value &&
-    !nameError.value &&
-    !emailError.value &&
-    !passwordError.value &&
-    !confirmPasswordError.value,
-);
-
-const isLoading = computed(() => registerMutation.isPending.value);
-
-async function handleRegister() {
-  if (!isFormValid.value) return;
+const handleRegister = handleSubmit(async (values) => {
   error.value = "";
   try {
-    await registerMutation.mutateAsync({
-      name: name.value,
-      email: email.value,
-      password: password.value,
+    await registerMutateAsync({
+      name: values.name,
+      email: values.email,
+      password: values.password,
     });
   } catch (err) {
     error.value = "Erro ao cadastrar. Tente novamente.";
   }
-}
+});
 </script>
 
 <template>
@@ -75,7 +47,7 @@ async function handleRegister() {
     <div class="register-card">
       <div class="register-header">
         <router-link to="/">
-          <img :src="logo" alt="Logo" />
+          <Logo />
         </router-link>
         <p>Insira seus dados para se cadastrar</p>
       </div>
@@ -124,10 +96,10 @@ async function handleRegister() {
           variant="primary"
           size="large"
           full-width
-          :disabled="!isFormValid || isLoading"
-          :loading="isLoading"
+          :disabled="!meta.valid || registerPending"
+          :loading="registerPending"
         >
-          {{ isLoading ? "Cadastrando..." : "Cadastrar" }}
+          {{ registerPending ? "Cadastrando..." : "Cadastrar" }}
         </Button>
 
         <div class="divider">
@@ -175,6 +147,10 @@ async function handleRegister() {
 .register-header {
   text-align: center;
   margin-bottom: 32px;
+
+  a {
+    display: inline-block;
+  }
 
   h1 {
     font-size: 2rem;

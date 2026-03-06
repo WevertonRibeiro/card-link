@@ -10,6 +10,7 @@ import Container from "@/components/layout/Container.vue";
 import SearchInput from "@/components/ui/SearchInput.vue";
 import Profile from "@/components/ui/Profile.vue";
 import Menu from "@/components/ui/Menu.vue";
+import Logo from "@/components/ui/Logo.vue";
 
 import {
   AllApplication,
@@ -66,7 +67,7 @@ const handleLogout = () => {
 <template>
   <div class="header">
     <Container class="header-container">
-      <img src="../../assets/images/logo-cardlink.svg" class="logo" />
+      <router-link to="/"><Logo class="logo" /></router-link>
 
       <SearchInput
         v-model="searchValue"
@@ -78,7 +79,6 @@ const handleLogout = () => {
 
       <Menu :items="items" class="profile-wrapper" :disabled="!isAuthenticated">
         <template #trigger>
-          {{ isAuthenticated }}
           <Profile
             v-if="isAuthenticated"
             :name="user?.name || ''"
@@ -115,6 +115,7 @@ const handleLogout = () => {
   align-items: center;
   .logo {
     height: 30px;
+    width: 122px;
   }
 
   @media (max-width: 900px) {

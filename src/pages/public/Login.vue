@@ -1,51 +1,42 @@
 <script lang="ts" setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 import googleG from "@/assets/images/google-g.png";
-import logo from "@/assets/images/logo-cardlink.svg";
+import Logo from "@/components/ui/Logo.vue";
 
 import TextInput from "@/components/ui/TextInput.vue";
 import Button from "@/components/ui/Button.vue";
 
+import { useForm, useField } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/yup";
+import { loginSchema } from "@/modules/auth/schemas/auth.schema";
+
 import { useLoginMutation } from "@/modules/auth/composables/useAuthQuery";
 
-const loginMutation = useLoginMutation();
+const { mutateAsync: mutateLoginAsync, isPending: isLoginPending } =
+  useLoginMutation();
 
-const email = ref("");
-const password = ref("");
 const error = ref("");
 
-const emailError = computed(() => {
-  if (!email.value) return "";
-  if (!email.value.includes("@")) return "Email inválido";
-  return "";
+const { handleSubmit, meta } = useForm({
+  validationSchema: toTypedSchema(loginSchema),
 });
 
-const passwordError = computed(() => {
-  if (!password.value) return "";
-  if (password.value.length < 6) return "Mínimo 6 caracteres";
-  return "";
-});
+const { value: email, errorMessage: emailError } = useField<string>("email");
+const { value: password, errorMessage: passwordError } =
+  useField<string>("password");
 
-const isFormValid = computed(
-  () =>
-    email.value && password.value && !emailError.value && !passwordError.value,
-);
-
-const isLoading = computed(() => loginMutation.isPending.value);
-
-async function handleLogin() {
-  if (!isFormValid.value) return;
+const onSubmit = handleSubmit(async (values) => {
   error.value = "";
   try {
-    await loginMutation.mutateAsync({
-      email: email.value,
-      password: password.value,
+    await mutateLoginAsync({
+      email: values.email,
+      password: values.password,
     });
   } catch (err) {
     error.value = "email ou senha incorreto!";
   }
-}
+});
 </script>
 
 <template>
@@ -53,11 +44,11 @@ async function handleLogin() {
     <div class="login-card">
       <div class="login-header">
         <router-link to="/">
-          <img :src="logo" alt="Logo" />
+          <Logo />
         </router-link>
       </div>
 
-      <form @submit.prevent="handleLogin" class="login-form">
+      <form @submit.prevent="onSubmit" class="login-form">
         <div v-if="error" class="error-banner">{{ error }}</div>
 
         <TextInput
@@ -87,10 +78,10 @@ async function handleLogin() {
           variant="primary"
           size="large"
           full-width
-          :disabled="!isFormValid || isLoading"
-          :loading="isLoading"
+          :disabled="!meta.valid || isLoginPending"
+          :loading="isLoginPending"
         >
-          {{ isLoading ? "Entrando..." : "Entrar" }}
+          {{ isLoginPending ? "Entrando..." : "Entrar" }}
         </Button>
 
         <div class="divider">
@@ -138,6 +129,10 @@ async function handleLogin() {
 .login-header {
   text-align: center;
   margin-bottom: 32px;
+
+  a {
+    display: inline-block;
+  }
 
   h1 {
     font-size: 2rem;

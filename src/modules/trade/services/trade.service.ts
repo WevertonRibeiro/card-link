@@ -9,16 +9,16 @@ import {
 
 export async function getTrades(): Promise<TradesResponse> {
   const response = await api.get<TradesResponseDTO>("/trades?rpp=9&page=1");
-
-  const data = mapTradesResponse(response.data);
-
-  return data;
+  return mapTradesResponse(response.data);
 }
 
-export async function PostTrade(
+export async function postTrade(
   cards: TradeRequestDTO,
 ): Promise<{ tradeId: string }> {
   const response = await api.post<{ tradeId: string }>("/trades", cards);
-
   return mapTradePostResponse(response.data);
+}
+
+export async function deleteTrade(id: string) {
+  await api.delete(`/trades/${id}`);
 }
