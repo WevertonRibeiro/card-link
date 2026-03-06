@@ -92,7 +92,6 @@ const openModal = async () => {
   await nextTick();
 
   requestAnimationFrame(() => {
-    document.body.style.overflow = 'hidden';
     isVisible.value = true;
 
     const centerX = window.innerWidth / 2;
@@ -122,6 +121,9 @@ const openModal = async () => {
       transformOrigin: 'center center'
     };
   })
+  setTimeout(() => {
+    document.body.style.overflow = 'hidden';
+  }, 1000);
 };
 
 const closeModal = () => {
