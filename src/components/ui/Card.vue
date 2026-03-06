@@ -1,6 +1,4 @@
-<script lang="ts" setup>
-import { TransferData } from "@icon-park/vue-next";
-</script>
+<script lang="ts" setup></script>
 <template>
   <div class="card-wrapper">
     <slot></slot>
