@@ -7,13 +7,21 @@ import logo from "@/assets/images/logo-cardlink.svg";
 import TextInput from "@/components/ui/TextInput.vue";
 import Button from "@/components/ui/Button.vue";
 
-import { useLoginMutation } from "@/modules/auth/composables/useAuthQuery";
+import { useRegisterMutation } from "@/modules/auth/composables/useAuthQuery";
 
-const loginMutation = useLoginMutation();
+const registerMutation = useRegisterMutation();
 
+const name = ref("");
 const email = ref("");
 const password = ref("");
+const confirmPassword = ref("");
 const error = ref("");
+
+const nameError = computed(() => {
+  if (!name.value) return "";
+  if (name.value.length < 2) return "Nome deve ter pelo menos 2 caracteres";
+  return "";
+});
 
 const emailError = computed(() => {
   if (!email.value) return "";
@@ -27,38 +35,62 @@ const passwordError = computed(() => {
   return "";
 });
 
+const confirmPasswordError = computed(() => {
+  if (!confirmPassword.value) return "";
+  if (confirmPassword.value !== password.value) return "Senhas não coincidem";
+  return "";
+});
+
 const isFormValid = computed(
   () =>
-    email.value && password.value && !emailError.value && !passwordError.value,
+    name.value &&
+    email.value &&
+    password.value &&
+    confirmPassword.value &&
+    !nameError.value &&
+    !emailError.value &&
+    !passwordError.value &&
+    !confirmPasswordError.value,
 );
 
-const isLoading = computed(() => loginMutation.isPending.value);
+const isLoading = computed(() => registerMutation.isPending.value);
 
-async function handleLogin() {
+async function handleRegister() {
   if (!isFormValid.value) return;
   error.value = "";
   try {
-    await loginMutation.mutateAsync({
+    await registerMutation.mutateAsync({
+      name: name.value,
       email: email.value,
       password: password.value,
     });
   } catch (err) {
-    error.value = "email ou senha incorreto!";
+    error.value = "Erro ao cadastrar. Tente novamente.";
   }
 }
 </script>
 
 <template>
-  <div class="login-container">
-    <div class="login-card">
-      <div class="login-header">
+  <div class="register-container">
+    <div class="register-card">
+      <div class="register-header">
         <router-link to="/">
           <img :src="logo" alt="Logo" />
         </router-link>
+        <p>Insira seus dados para se cadastrar</p>
       </div>
 
-      <form @submit.prevent="handleLogin" class="login-form">
+      <form @submit.prevent="handleRegister" class="register-form">
         <div v-if="error" class="error-banner">{{ error }}</div>
+
+        <TextInput
+          v-model="name"
+          label="Nome"
+          type="text"
+          placeholder="Seu nome completo"
+          autocomplete="name"
+          :error="nameError"
+        />
 
         <TextInput
           v-model="email"
@@ -74,13 +106,18 @@ async function handleLogin() {
           label="Senha"
           type="password"
           placeholder="Digite sua senha"
-          autocomplete="current-password"
+          autocomplete="new-password"
           :error="passwordError"
         />
 
-        <router-link to="#" class="forgot-password"
-          >Esqueceu a senha?</router-link
-        >
+        <TextInput
+          v-model="confirmPassword"
+          label="Confirmar Senha"
+          type="password"
+          placeholder="Confirme sua senha"
+          autocomplete="new-password"
+          :error="confirmPasswordError"
+        />
 
         <Button
           type="submit"
@@ -90,7 +127,7 @@ async function handleLogin() {
           :disabled="!isFormValid || isLoading"
           :loading="isLoading"
         >
-          {{ isLoading ? "Entrando..." : "Entrar" }}
+          {{ isLoading ? "Cadastrando..." : "Cadastrar" }}
         </Button>
 
         <div class="divider">
@@ -102,10 +139,10 @@ async function handleLogin() {
         </Button>
       </form>
 
-      <p class="login-footer">
-        Não tem uma conta?
-        <router-link to="/auth/register" class="register-link"
-          >Cadastre-se gratuitamente</router-link
+      <p class="register-footer">
+        Já tem uma conta?
+        <router-link to="/auth/login" class="login-link"
+          >Faça login</router-link
         >
       </p>
     </div>
@@ -113,7 +150,7 @@ async function handleLogin() {
 </template>
 
 <style lang="scss" scoped>
-.login-container {
+.register-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,7 +158,7 @@ async function handleLogin() {
   padding: 20px;
 }
 
-.login-card {
+.register-card {
   width: 100%;
   max-width: 420px;
   padding: 40px;
@@ -135,7 +172,7 @@ async function handleLogin() {
   }
 }
 
-.login-header {
+.register-header {
   text-align: center;
   margin-bottom: 32px;
 
@@ -154,7 +191,7 @@ async function handleLogin() {
   }
 }
 
-.login-form {
+.register-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -169,19 +206,6 @@ async function handleLogin() {
   color: var(--color-offer);
   font-size: 0.9rem;
   text-align: center;
-}
-
-.forgot-password {
-  text-decoration: none;
-  color: var(--color-receive);
-  font-size: 0.9rem;
-  font-weight: 500;
-  align-self: flex-end;
-  transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 0.8;
-  }
 }
 
 .divider {
@@ -210,13 +234,13 @@ async function handleLogin() {
   }
 }
 
-.login-footer {
+.register-footer {
   text-align: center;
   font-size: 0.9rem;
   color: var(--color-text-secundary);
   margin: 0;
 
-  .register-link {
+  .login-link {
     color: var(--color-receive);
     text-decoration: none;
     font-weight: 600;

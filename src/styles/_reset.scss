@@ -3,3 +3,17 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+body {
+  background-color: var(--color-background);
+  font-family: "DM Sans", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+}

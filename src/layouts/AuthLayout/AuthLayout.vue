@@ -1,3 +1,8 @@
+<script lang="ts" setup>
+import { useTheme } from "@/composables/useTheme";
+
+const { theme } = useTheme();
+</script>
 <template>
   <main class="auth-layout">
     <router-view />

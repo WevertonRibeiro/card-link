@@ -1,0 +1,23 @@
+:root {
+  --color-background: var(--white);
+  --color-surface: var(--white);
+  --color-surface-secundary: var(--gray-light);
+  --color-text: var(--black);
+  --color-text-active: var(--green);
+  --color-text-secundary: var(--gray-middle);
+  --color-border: var(--gray);
+  --color-star: var(--yellow);
+
+  --color-offer: var(--red);
+  --color-receive: var(--green);
+  --color-danger: var(--red);
+}
+
+:root[data-theme="dark"] {
+  --color-background: var(--black);
+  --color-surface: var(--black-light);
+  --color-surface-secundary: var(--black-middle);
+  --color-text: var(--white);
+  --color-text-secundary: var(--gray-middle);
+  --color-border: var(--gray-black);
+}
