@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuthStore } from "@/modules/auth/stores/auth.store";
 
 import { env } from "@/config/env";
 
@@ -13,3 +14,16 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const authStore = useAuthStore();
+
+    if (error.response?.status === 401) {
+      authStore.clearSession()
+    }
+
+    return Promise.reject(error);
+  }
+);

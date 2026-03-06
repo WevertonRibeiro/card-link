@@ -60,48 +60,28 @@ const onSearch = (value: string) => {
 };
 
 const handleLogout = () => {
-  authStore.clearSession();
+  authStore.clearSession(false);
   router.push("/");
 };
 </script>
 <template>
   <div class="header">
     <Container class="header-container">
-      <router-link to="/"><Logo class="logo" /></router-link>
+      <router-link to="/">
+        <Logo class="logo" />
+      </router-link>
 
-      <SearchInput
-        v-model="searchValue"
-        @search="onSearch"
-        placeholder="Procurar cartas"
-        :width="500"
-        class="search"
-      />
+      <SearchInput v-model="searchValue" @search="onSearch" placeholder="Procurar cartas" :width="500" class="search" />
 
       <Menu :items="items" class="profile-wrapper" :disabled="!isAuthenticated">
         <template #trigger>
-          <Profile
-            v-if="isAuthenticated"
-            :name="user?.name || ''"
-            showFullName
-            actionTitle="Sair"
-            :action="handleLogout"
-            class="profile-header"
-          />
-          <Profile
-            v-else
-            name=""
-            actionTitle="Entrar"
-            :action="() => router.push('auth/login')"
-            class="profile-header"
-          />
+          <Profile v-if="isAuthenticated" :name="user?.name || ''" showFullName actionTitle="Sair"
+            :action="handleLogout" class="profile-header" />
+          <Profile v-else name="" actionTitle="Entrar" :action="() => router.push('auth/login')"
+            class="profile-header" />
         </template>
         <template #header>
-          <Profile
-            :name="user?.name || ''"
-            showFullName
-            actionTitle="emaildoerto@gmail.com"
-            reverse
-          />
+          <Profile :name="user?.name || ''" showFullName actionTitle="emaildoerto@gmail.com" reverse />
         </template>
       </Menu>
     </Container>
@@ -113,6 +93,7 @@ const handleLogout = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .logo {
     height: 30px;
     width: 122px;
@@ -122,9 +103,11 @@ const handleLogout = () => {
     .logo {
       height: 25px;
     }
+
     .profile-wrapper {
       justify-self: end;
     }
+
     .profile-header {
       :deep(.name-wrapper) {
         display: none;
