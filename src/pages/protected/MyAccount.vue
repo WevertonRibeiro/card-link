@@ -2,6 +2,8 @@
 import { ref, watch, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
+import { Delete } from "@icon-park/vue-next";
+
 import Tabs from "@/components/ui/Tabs.vue";
 import Container from "@/components/layout/Container.vue";
 import GameCard from "@/components/ui/GameCard.vue";
@@ -21,6 +23,7 @@ import {
 import {
   useTradesQuery,
   useCreateTradeMutation,
+  useDeleteTradeMutation,
 } from "@/modules/trade/composables/useTradesQuery";
 import type { TradeCardRequestDTO } from "@/modules/trade/types/trade.dto";
 
@@ -31,6 +34,7 @@ const { data: authData } = useMeQuery();
 
 const postMeCards = usePostMeCardsMutation();
 const createTrade = useCreateTradeMutation();
+const deleteTrade = useDeleteTradeMutation();
 
 const showAddModal = ref(false);
 const showTradeModal = ref(false);
@@ -84,6 +88,10 @@ function handleSelectCards(cardIds: string[]) {
 function handleCreateTrade(cards: TradeCardRequestDTO[]) {
   createTrade.mutate({ cards });
 }
+
+function handleDeleteTrade(tradeId: string) {
+  deleteTrade.mutate(tradeId);
+}
 </script>
 
 <template>
@@ -120,6 +128,12 @@ function handleCreateTrade(cards: TradeCardRequestDTO[]) {
                   :key="trade.id"
                   class="trade-card"
                 >
+                  <div
+                    @click="() => handleDeleteTrade(trade.id)"
+                    class="delete-btn"
+                  >
+                    <Delete />
+                  </div>
                   <div class="receive">
                     <h2>A Receber</h2>
                     <div class="cards">
@@ -197,6 +211,7 @@ function handleCreateTrade(cards: TradeCardRequestDTO[]) {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px 48px;
+      position: relative;
       @media (max-width: 900px) {
         display: flex;
         flex-direction: column;
@@ -224,6 +239,26 @@ function handleCreateTrade(cards: TradeCardRequestDTO[]) {
         }
       }
     }
+  }
+}
+.delete-btn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  right: -10px;
+  top: -10px;
+  background: var(--color-danger);
+  color: var(--color-text);
+  transition: all 0.2s ease;
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(120, 205, 166, 0.2);
   }
 }
 </style>

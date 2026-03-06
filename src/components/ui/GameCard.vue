@@ -5,6 +5,8 @@ type GameCardProps = {
   image: string;
 };
 
+import cardBack from "@/assets/images/yugioh-card-back.jpg";
+
 const props = defineProps<GameCardProps>();
 
 const cardRef = ref<HTMLElement | null>(null);
@@ -61,10 +63,7 @@ onMounted(() => {
         <img :src="image" />
       </div>
       <div class="card-back">
-        <img
-          src="https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-          alt=""
-        />
+        <img :src="cardBack" alt="" />
       </div>
     </div>
   </div>

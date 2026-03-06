@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 
 import googleG from "@/assets/images/google-g.png";
-import logo from "@/assets/images/logo-cardlink.svg";
+import Logo from "@/components/ui/Logo.vue";
 
 import TextInput from "@/components/ui/TextInput.vue";
 import Button from "@/components/ui/Button.vue";
@@ -75,7 +75,7 @@ async function handleRegister() {
     <div class="register-card">
       <div class="register-header">
         <router-link to="/">
-          <img :src="logo" alt="Logo" />
+          <Logo />
         </router-link>
         <p>Insira seus dados para se cadastrar</p>
       </div>
@@ -175,6 +175,10 @@ async function handleRegister() {
 .register-header {
   text-align: center;
   margin-bottom: 32px;
+
+  a {
+    display: inline-block;
+  }
 
   h1 {
     font-size: 2rem;

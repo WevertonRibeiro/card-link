@@ -112,7 +112,7 @@ function handleCreateTrade() {
         </div>
 
         <div class="modal-actions">
-          <Button @click="handleClose">Cancelar</Button>
+          <Button @click="handleClose" variant="danger">Cancelar</Button>
           <Button
             @click="handleCreateTrade"
             :disabled="
