@@ -9,7 +9,6 @@ type GameCardProps = {
 const props = defineProps<GameCardProps>();
 
 const cardRef = ref<HTMLElement | null>(null);
-const modalCardRef = ref<HTMLElement | null>(null);
 const placeholderRef = ref<HTMLElement | null>(null);
 
 let rafId: number | null = null;
@@ -76,6 +75,7 @@ const openModal = async () => {
   const rect = placeholder.getBoundingClientRect();
 
   modalStyle.value = {
+    willChange: "transform",
     position: 'fixed',
     top: '0px',
     left: '0px',
@@ -116,7 +116,7 @@ const openModal = async () => {
       left: '0px',
       width: `${rect.width}px`,
       height: `${rect.height}px`,
-      transform: `translate(${targetX}px, ${targetY}px) perspective(1000px) rotateY(360deg) scale(${scale})`,
+      transform: `translate3d(${targetX}px, ${targetY}px, 0) perspective(1000px) rotateY(360deg) scale(${scale})`,
       transition: 'transform 1000ms',
       zIndex: '9999',
       transformOrigin: 'center center'
