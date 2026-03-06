@@ -109,7 +109,7 @@ const handleLogout = () => {
     }
 
     .profile-header {
-      :deep(.name-wrapper) {
+      :deep(.name-wrapper .name) {
         display: none;
       }
     }
