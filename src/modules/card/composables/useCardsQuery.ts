@@ -5,6 +5,7 @@ import {
   postMeCards,
   getCards,
 } from "../services/cardService";
+import { toast } from "vue3-hot-toast";
 
 export function useFeaturedCardsQuery() {
   return useQuery({
@@ -37,6 +38,10 @@ export function usePostMeCardsMutation() {
     mutationFn: postMeCards,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["meCards"] });
+      toast.success("Carta adicionada com sucesso!")
     },
+    onError: (error) => {
+      toast.error(error.message)
+    }
   });
 }
