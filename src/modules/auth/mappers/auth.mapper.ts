@@ -11,7 +11,7 @@ import type {
 
 import { mapCard } from "@/modules/card/mappers/card.mapper";
 
-export function mapMe(dto: MeResponseDTO): MeResponse {
+export function mapMeResponse(dto: MeResponseDTO): MeResponse {
   return {
     id: dto.id,
     name: dto.name,

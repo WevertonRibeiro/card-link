@@ -11,12 +11,13 @@ import GameCardSkeleton from "@/components/ui/GameCardSkeleton.vue";
 import { Star, History } from "@icon-park/vue-next";
 
 import { useTradesQuery } from "@/modules/trade/composables/useTradesQuery";
-import { useCardsQuery } from "@/modules/card/composables/useCardsQuery";
+import { useFeaturedCardsQuery } from "@/modules/card/composables/useCardsQuery";
 
 import { getTradeCardImages } from "@/modules/trade/utils/tradeImages.utils";
 
 const { data: tradesData, isLoading, isError, error } = useTradesQuery();
-const { data: featuredCardsData, isLoading: isLoadingCards } = useCardsQuery();
+const { data: featuredCardsData, isLoading: isLoadingCards } =
+  useFeaturedCardsQuery();
 
 const trades = computed(() => tradesData.value?.trades ?? []);
 
@@ -97,7 +98,6 @@ const tradeItems = computed(() =>
         <CardSkeleton v-for="n in 6" :key="`all-trades-skeleton-${n}`" />
       </section>
     </div>
-    <div v-else-if="isError" class="error">{{ error?.message }}</div>
     <section v-else class="trades-wrapper">
       <Card v-for="trade in tradeItems" :key="trade.id">
         <div class="top">

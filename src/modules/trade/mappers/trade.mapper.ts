@@ -4,6 +4,14 @@ import type { TradesResponse, Trade } from "../types/trade.model";
 import type { Card } from "@/modules/card/types/card.model";
 import { mapCard } from "@/modules/card/mappers/card.mapper";
 
+export function mapTradePostResponse(dto: { tradeId: string }): {
+  tradeId: string;
+} {
+  return {
+    tradeId: dto.tradeId,
+  };
+}
+
 export function mapTradesResponse(dto: TradesResponseDTO): TradesResponse {
   return {
     trades: dto.list.map(mapTrade),

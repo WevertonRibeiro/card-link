@@ -32,12 +32,14 @@ const items = computed(() => {
     {
       icon: AllApplication,
       label: "Minha coleção",
-      action: () => console.log("Perfil"),
+      action: () =>
+        router.push({ path: "/my-account", query: { tab: "collection" } }),
     },
     {
       icon: TransferData,
       label: "Trocas ativas",
-      action: () => console.log("Config"),
+      action: () =>
+        router.push({ path: "/my-account", query: { tab: "requests" } }),
     },
     {
       icon: theme.value === "light" ? Moon : Sun,
@@ -58,6 +60,7 @@ const onSearch = (value: string) => {
 
 const handleLogout = () => {
   authStore.clearSession();
+  router.push("/");
 };
 </script>
 <template>

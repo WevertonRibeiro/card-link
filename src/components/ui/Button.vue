@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-type ButtonVariant = "primary" | "secondary" | "outline";
+type ButtonVariant = "primary" | "secondary" | "outline" | "danger";
 type ButtonSize = "small" | "medium" | "large";
 
 interface ButtonProps {
@@ -88,6 +88,16 @@ const buttonClass = computed(() => ({
     background: transparent;
     color: var(--color-receive);
     border: 2px solid var(--color-receive);
+
+    &:hover:not(:disabled) {
+      background: rgba(120, 205, 166, 0.1);
+    }
+  }
+
+  &.danger {
+    background: transparent;
+    color: var(--color-danger);
+    border: 2px solid var(--color-danger);
 
     &:hover:not(:disabled) {
       background: rgba(120, 205, 166, 0.1);
