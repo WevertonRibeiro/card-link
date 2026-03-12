@@ -1,0 +1,318 @@
+{
+  "me": {
+    "id": "mock-user-id-1",
+    "name": "Jane User",
+    "email": "jane@example.com",
+    "cards": [
+      {
+        "id": "mock-user-card-1",
+        "name": "User's Mock Card",
+        "description": "This is a mock card owned by the user.",
+        "imageUrl": "https://picsum.photos/seed/usercard/300/400",
+        "createdAt": "2024-03-01T12:00:00Z"
+      }
+    ]
+  },
+  "login": {
+    "token": "mock-jwt-token-abc123",
+    "user": {
+      "id": "mock-user-id-1",
+      "name": "Jane User",
+      "email": "jane@example.com"
+    }
+  },
+  "register": {
+    "userId": "mock-user-id-1"
+  },
+  "cards": {
+    "list": [
+      {
+        "id": "mock-card-1",
+        "name": "Dragon of the West",
+        "description": "Fearsome fire dragon. Very rare.",
+        "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_280-2x.png",
+        "createdAt": "2024-03-10T14:30:00Z"
+      },
+      {
+        "id": "mock-card-2",
+        "name": "Mystic Elf",
+        "description": "A healer from the deep woods.",
+        "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_290-2x.png",
+        "createdAt": "2024-03-11T09:15:00Z"
+      },
+      {
+        "id": "mock-card-3",
+        "name": "Goblin Tinkerer",
+        "description": "Unstable contraptions are his specialty.",
+        "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_289-2x.png",
+        "createdAt": "2024-03-12T16:45:00Z"
+      },
+      {
+        "id": "mock-card-4",
+        "name": "Goblin Tinkerer",
+        "description": "Unstable contraptions are his specialty.",
+        "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_283-2x.png",
+        "createdAt": "2024-03-12T16:45:00Z"
+      },
+      {
+        "id": "mock-card-5",
+        "name": "Goblin Tinkerer",
+        "description": "Unstable contraptions are his specialty.",
+        "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_284-2x.png",
+        "createdAt": "2024-03-12T16:45:00Z"
+      }
+    ],
+    "rpp": 5,
+    "page": 1,
+    "more": false
+  },
+  "trades": {
+    "list": [
+      {
+        "id": "mock-trade-1",
+        "userId": "mock-user-id-2",
+        "createdAt": "2024-03-15T10:00:00Z",
+        "user": {
+          "name": "Trader Bob"
+        },
+        "tradeCards": [
+          {
+            "id": "mock-tc-1",
+            "cardId": "mock-card-1",
+            "tradeId": "mock-trade-1",
+            "type": "OFFERING",
+            "card": {
+              "id": "mock-card-1",
+              "name": "Dragon of the West",
+              "description": "Fearsome fire dragon. Very rare.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_280-2x.png",
+              "createdAt": "2024-03-10T14:30:00Z"
+            }
+          },
+          {
+            "id": "mock-tc-2",
+            "cardId": "mock-user-card-1",
+            "tradeId": "mock-trade-1",
+            "type": "RECEIVING",
+            "card": {
+              "id": "mock-user-card-1",
+              "name": "User's Mock Card",
+              "description": "This is a mock card owned by the user.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_289-2x.png",
+              "createdAt": "2024-03-01T12:00:00Z"
+            }
+          },
+          {
+            "id": "mock-tc-3",
+            "cardId": "mock-user-card-1",
+            "tradeId": "mock-trade-1",
+            "type": "RECEIVING",
+            "card": {
+              "id": "mock-user-card-1",
+              "name": "User's Mock Card",
+              "description": "This is a mock card owned by the user.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_283-2x.png",
+              "createdAt": "2024-03-01T12:00:00Z"
+            }
+          },
+          {
+            "id": "mock-tc-4",
+            "cardId": "mock-user-card-1",
+            "tradeId": "mock-trade-1",
+            "type": "RECEIVING",
+            "card": {
+              "id": "mock-user-card-1",
+              "name": "User's Mock Card",
+              "description": "This is a mock card owned by the user.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_284-2x.png",
+              "createdAt": "2024-03-01T12:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mock-trade-2",
+        "userId": "mock-user-id-3",
+        "createdAt": "2024-03-16T10:00:00Z",
+        "user": {
+          "name": "Trader Alice"
+        },
+        "tradeCards": [
+          {
+            "id": "mock-tc-2-1",
+            "cardId": "mock-card-1",
+            "tradeId": "mock-trade-2",
+            "type": "RECEIVING",
+            "card": {
+              "id": "mock-card-1",
+              "name": "Dragon of the West",
+              "description": "Fearsome fire dragon. Very rare.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_280-2x.png",
+              "createdAt": "2024-03-10T14:30:00Z"
+            }
+          },
+          {
+            "id": "mock-tc-2-2",
+            "cardId": "mock-user-card-1",
+            "tradeId": "mock-trade-2",
+            "type": "OFFERING",
+            "card": {
+              "id": "mock-user-card-1",
+              "name": "User's Mock Card",
+              "description": "This is a mock card owned by the user.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_289-2x.png",
+              "createdAt": "2024-03-01T12:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mock-trade-3",
+        "userId": "mock-user-id-4",
+        "createdAt": "2024-03-16T11:00:00Z",
+        "user": {
+          "name": "Trader Charlie"
+        },
+        "tradeCards": [
+          {
+            "id": "mock-tc-3-1",
+            "cardId": "mock-card-2",
+            "tradeId": "mock-trade-3",
+            "type": "OFFERING",
+            "card": {
+              "id": "mock-card-2",
+              "name": "Mystic Elf",
+              "description": "A healer from the deep woods.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_290-2x.png",
+              "createdAt": "2024-03-11T09:15:00Z"
+            }
+          },
+          {
+            "id": "mock-tc-3-2",
+            "cardId": "mock-user-card-1",
+            "tradeId": "mock-trade-3",
+            "type": "RECEIVING",
+            "card": {
+              "id": "mock-user-card-1",
+              "name": "User's Mock Card",
+              "description": "This is a mock card owned by the user.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_289-2x.png",
+              "createdAt": "2024-03-01T12:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mock-trade-4",
+        "userId": "mock-user-id-5",
+        "createdAt": "2024-03-16T12:00:00Z",
+        "user": {
+          "name": "Trader Dave"
+        },
+        "tradeCards": [
+          {
+            "id": "mock-tc-4-1",
+            "cardId": "mock-card-2",
+            "tradeId": "mock-trade-4",
+            "type": "RECEIVING",
+            "card": {
+              "id": "mock-card-2",
+              "name": "Mystic Elf",
+              "description": "A healer from the deep woods.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_290-2x.png",
+              "createdAt": "2024-03-11T09:15:00Z"
+            }
+          },
+          {
+            "id": "mock-tc-4-2",
+            "cardId": "mock-user-card-1",
+            "tradeId": "mock-trade-4",
+            "type": "OFFERING",
+            "card": {
+              "id": "mock-user-card-1",
+              "name": "User's Mock Card",
+              "description": "This is a mock card owned by the user.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_289-2x.png",
+              "createdAt": "2024-03-01T12:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mock-trade-5",
+        "userId": "mock-user-id-6",
+        "createdAt": "2024-03-16T13:00:00Z",
+        "user": {
+          "name": "Trader Eve"
+        },
+        "tradeCards": [
+          {
+            "id": "mock-tc-5-1",
+            "cardId": "mock-card-3",
+            "tradeId": "mock-trade-5",
+            "type": "OFFERING",
+            "card": {
+              "id": "mock-card-3",
+              "name": "Goblin Tinkerer",
+              "description": "Unstable contraptions are his specialty.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_289-2x.png",
+              "createdAt": "2024-03-12T16:45:00Z"
+            }
+          },
+          {
+            "id": "mock-tc-5-2",
+            "cardId": "mock-user-card-1",
+            "tradeId": "mock-trade-5",
+            "type": "RECEIVING",
+            "card": {
+              "id": "mock-user-card-1",
+              "name": "User's Mock Card",
+              "description": "This is a mock card owned by the user.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_289-2x.png",
+              "createdAt": "2024-03-01T12:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "id": "mock-trade-6",
+        "userId": "mock-user-id-7",
+        "createdAt": "2024-03-16T14:00:00Z",
+        "user": {
+          "name": "Trader Frank"
+        },
+        "tradeCards": [
+          {
+            "id": "mock-tc-6-1",
+            "cardId": "mock-card-3",
+            "tradeId": "mock-trade-6",
+            "type": "RECEIVING",
+            "card": {
+              "id": "mock-card-3",
+              "name": "Goblin Tinkerer",
+              "description": "Unstable contraptions are his specialty.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_289-2x.png",
+              "createdAt": "2024-03-12T16:45:00Z"
+            }
+          },
+          {
+            "id": "mock-tc-6-2",
+            "cardId": "mock-user-card-1",
+            "tradeId": "mock-trade-6",
+            "type": "OFFERING",
+            "card": {
+              "id": "mock-user-card-1",
+              "name": "User's Mock Card",
+              "description": "This is a mock card owned by the user.",
+              "imageUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/ascended-heroes/pt-br/M7XJ_PTBR_289-2x.png",
+              "createdAt": "2024-03-01T12:00:00Z"
+            }
+          }
+        ]
+      }
+    ],
+    "rpp": 9,
+    "page": 1,
+    "more": false
+  }
+}
